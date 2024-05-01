@@ -20,6 +20,7 @@ def get_cities(state_id):
     cities = [city.to_dict() for city in state.cities]
     return jsonify(cities)
 
+
 @app_views.route('/states/<city_id>', strict_slashes=False)
 def get_city(city_id):
     """
@@ -30,7 +31,8 @@ def get_city(city_id):
         return jsonify(city.to_dict())
     else:
         return abort(404)
-    
+
+
 @app_views.route('/states/<city_id>', methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """
@@ -43,7 +45,8 @@ def delete_city(city_id):
         return jsonify({}), 200
     else:
         return abort(404)
-    
+
+
 @app_views.route('/states/<city_id>', methods=['POST'], strict_slashes=False)
 def create_city(state_id):
     """
@@ -63,7 +66,8 @@ def create_city(state_id):
 
     city = City(**data)
     city.save()
-    return jsonify(city.to_dict()),201
+    return jsonify(city.to_dict()), 201
+
 
 @app_views.route('/states/<city_id>', methods=['PUT'],
                  strict_slashes=False)
@@ -77,7 +81,7 @@ def update_city(city_id):
     if city:
         if not request.get_json():
             return abort(400, 'Not a JSON')
-        
+
         data = request.get_json()
         ignore_keys = ['id', 'state_id', 'created_at', 'update_at']
 
