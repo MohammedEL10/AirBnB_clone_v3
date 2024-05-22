@@ -77,4 +77,6 @@ def get_state(state_id):
             if key not in ignore_keys:
                 setattr(state, key, value)
                 state.save()
-                return jsonify(state.to_dict())
+                return jsonify(state.to_dict()), 200
+            else:
+                return abort(404)
